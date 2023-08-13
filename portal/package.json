@@ -1,24 +1,25 @@
 {
-  "name": "portal",
+  "name": "@mocaapi/portal",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview-astro": "astro preview",
+    "astro": "astro",
+    "preview": "wrangler pages dev ./dist"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^6.6.2",
+    "@astrojs/cloudflare": "^6.8.0",
     "@astrojs/react": "^2.2.1",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "^2.10.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "astro": "^2.10.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "wrangler": "^3.4.0"
+    "wrangler": "^3.5.0"
   }
 }
