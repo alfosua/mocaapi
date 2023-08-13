@@ -5,8 +5,8 @@ function Saludo() {
 
   useEffect(() => {
     fetch(`/api/hello?name=${new URLSearchParams(window.location.search).get('name') || 'World'}`)
-      .then((res) => res.text())
-      .then((data) => setText(data))
+      .then((res) => res.json())
+      .then((data) => setText(data.text))
   }, [])
 
   return (

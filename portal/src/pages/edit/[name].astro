@@ -1,0 +1,89 @@
+---
+import EntityEditor, { Entity } from '@components/EntityEditor'
+import Layout from '@layouts/Layout.astro'
+
+const { name } = Astro.params
+
+const customer: Entity = {
+  id: crypto.randomUUID(),
+  name: 'Customer',
+  description:
+    'A customer is a person or company that receives, consumes or buys a product or service and can choose between different goods and suppliers.',
+  properties: [
+    {
+      name: 'id',
+      description: 'The id of the customer entity',
+      value: {
+        type: 'string',
+        kind: 'uuid',
+      },
+    },
+    {
+      name: 'name',
+      description: 'The name of the customer entity',
+      value: {
+        type: 'string',
+        kind: 'company-name',
+      },
+    },
+  ],
+}
+
+const product = {
+  id: crypto.randomUUID(),
+  name: 'Product',
+  description: 'A product is an article or substance that is manufactured or refined for sale.',
+  properties: [
+    {
+      name: 'id',
+      description: 'The id of the product entity',
+      value: {
+        type: 'string',
+        kind: 'uuid',
+      },
+    },
+    {
+      name: 'name',
+      description: 'The name of the product entity',
+      value: {
+        type: 'string',
+        kind: 'product-name',
+      },
+    },
+  ],
+}
+
+const items = [customer, product]
+
+const item = items.find((item) => item.name === name)
+---
+
+<Layout title={`Edit ${name}`}>
+  <main class='container mx-auto grid [grid-template-columns:1fr_2fr] h-full'>
+    <header class='p-3'>
+      <h1>Edit {name}</h1>
+    </header>
+    <nav class='row-start-1 row-end-3'>
+      <ul class='flex flex-col p-3 gap-3'>
+        {
+          items.map((item) => {
+            const active = item.name === name
+
+            return (
+              <li
+                class:list={['bg-slate-200 bg-opacity-20 rounded-md p-3 flex', active ? 'ring-2 ring-slate-200' : '']}
+              >
+                <a href={`/edit/${item.name}`} class='w-full h-full hover:underline underline-offset-2'>
+                  {item.name}
+                </a>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </nav>
+    <main class='min-h-0 overflow-auto p-3'>
+      {item ? <EntityEditor entity={item} client:load /> : <p>Entity not found</p>}
+    </main>
+  </main>
+</Layout>
